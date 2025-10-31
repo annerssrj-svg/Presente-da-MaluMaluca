@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Feliz Aniversário Malu!</title>
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #ffd6e0, #b5e0ff);
+        font-family: 'Comic Sans MS', cursive;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-size: 3em;
+        color: #ff4da6;
+        text-shadow: 2px 2px #fff;
+    }
+
+    p {
+        font-size: 1.5em;
+        color: #444;
+    }
+
+    .botoes {
+        margin-top: 20px;
+    }
+
+    button {
+        font-size: 1.2em;
+        padding: 10px 20px;
+        margin: 10px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        transform: scale(1.1);
+    }
+
+    #sim {
+        background-color: #ff99cc;
+        color: white;
+    }
+
+    #nao {
+        background-color: #b5e0ff;
+        color: #333;
+    }
+
+    .caixa {
+        width: 150px;
+        height: 150px;
+        background: url('https://cdn-icons-png.flaticon.com/512/869/869869.png') no-repeat center;
+        background-size: contain;
+        cursor: pointer;
+        display: none;
+        margin-top: 30px;
+    }
+
+    .cupcake {
+        width: 200px;
+        display: none;
+        animation: surgir 1.5s ease forwards;
+    }
+
+    @keyframes surgir {
+        from { transform: scale(0); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Confete */
+    .confete {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background-color: hsl(var(--hue), 70%, 60%);
+        top: 0;
+        left: var(--x);
+        animation: cair 3s linear forwards;
+        border-radius: 50%;
+    }
+
+    @keyframes cair {
+        0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+        100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+<h1>🎉 PARABÉNS MALU! 🎉</h1>
+<p>Gostaria de abrir seu presente?</p>
+
+<div class="botoes">
+    <button id="sim">Sim!</button>
+    <button id="nao">Não 😢</button>
+</div>
+
+<div class="caixa" id="caixa"></div>
+<img class="cupcake" id="cupcake" src="https://i.pinimg.com/originals/fd/36/62/fd36628b65a72ce5d3ad15a02cb45bb1.png" alt="Cupcake do Cinnamoroll">
+
+<script>
+const botaoSim = document.getElementById("sim");
+const botaoNao = document.getElementById("nao");
+const caixa = document.getElementById("caixa");
+const cupcake = document.getElementById("cupcake");
+
+botaoSim.addEventListener("click", () => {
+    document.querySelector("p").style.display = "none";
+    document.querySelector(".botoes").style.display = "none";
+    caixa.style.display = "block";
+});
+
+botaoNao.addEventListener("click", () => {
+    alert("Ahh 😢... Tudo bem, Malu! O presente vai te esperar 🎁");
+});
+
+caixa.addEventListener("click", () => {
+    caixa.style.display = "none";
+    cupcake.style.display = "block";
+    soltarConfete();
+});
+
+function soltarConfete() {
+    for (let i = 0; i < 100; i++) {
+        const confete = document.createElement("div");
+        confete.classList.add("confete");
+        confete.style.setProperty("--x", Math.random() * 100 + "vw");
+        confete.style.setProperty("--hue", Math.random() * 360);
+        document.body.appendChild(confete);
+
+        setTimeout(() => confete.remove(), 3000);
+    }
+}
+</script>
+
+</body>
+</html>
