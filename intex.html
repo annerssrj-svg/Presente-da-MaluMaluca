@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parabéns Malu!</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(135deg, #ffb6f9, #c2f0ff);
+        font-family: 'Comic Sans MS', cursive;
+        text-align: center;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-size: 3em;
+        color: #ff66b2;
+        margin-top: 100px;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+    }
+
+    p {
+        font-size: 1.5em;
+        color: #444;
+    }
+
+    button {
+        background-color: #ffb6c1;
+        border: none;
+        border-radius: 20px;
+        padding: 15px 30px;
+        margin: 20px;
+        font-size: 1.2em;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button:hover {
+        background-color: #ff66b2;
+        color: white;
+        transform: scale(1.1);
+    }
+
+    #gift-box {
+        width: 200px;
+        height: 200px;
+        background: url('https://i.imgur.com/Vu9m6jG.png') no-repeat center/contain;
+        margin: 50px auto;
+        display: none;
+        cursor: pointer;
+        animation: bounce 1s infinite;
+    }
+
+    @keyframes bounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-10px); }
+    }
+
+    #cupcake {
+        display: none;
+        width: 220px;
+        margin: 30px auto;
+        animation: fadeIn 2s ease-in;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.5); }
+        to { opacity: 1; transform: scale(1); }
+    }
+
+    .confetti {
+        position: fixed;
+        width: 10px;
+        height: 10px;
+        background: pink;
+        animation: fall 3s linear forwards;
+        border-radius: 50%;
+        z-index: 1000;
+    }
+
+    @keyframes fall {
+        to {
+            transform: translateY(100vh) rotate(720deg);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+
+<h1>🎉 PARABÉNS MALU! 🎉</h1>
+<p>Gostaria de abrir seu presente?</p>
+<div id="buttons">
+    <button onclick="showGift()">Sim 🎁</button>
+    <button onclick="alert('Ahhh... tudo bem 😢')">Não 😢</button>
+</div>
+
+<div id="gift-box" onclick="openGift()"></div>
+<img id="cupcake" src="images/cinnamoroll-cupcake.png" alt="Arte kawaii de Cinnamoroll em um cupcake com morango e wafer, ilustração pastel fofa estilo Sanrio">
+
+
+<script>
+function showGift() {
+    document.getElementById('buttons').style.display = 'none';
+    document.getElementById('gift-box').style.display = 'block';
+}
+
+function openGift() {
+    document.getElementById('gift-box').style.display = 'none';
+    document.getElementById('cupcake').style.display = 'block';
+    launchConfetti();
+}
+
+function launchConfetti() {
+    for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.backgroundColor = randomColor();
+        confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 3000);
+    }
+}
+
+function randomColor() {
+    const colors = ['#ffb6c1', '#ff66b2', '#c2f0ff', '#ffff99', '#b19cd9'];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+</script>
+
+</body>
+</html>
